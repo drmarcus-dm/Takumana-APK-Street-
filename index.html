@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takumana APK Street - Home of Free Applications!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; }
+        .header { background-color: #1f1f1f; padding: 20px; text-align: center; }
+        .app-card { background-color: #2c2c2c; border-radius: 10px; padding: 15px; margin: 10px; cursor: pointer; }
+        .app-card:hover { background-color: #3a3a3a; }
+        .modal-content { background-color: #1f1f1f; color: #fff; }
+        .donation { background-color: #333; padding: 20px; margin: 20px; border-radius: 10px; text-align: center; }
+        .search-bar { margin: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Takumana APK Street</h1>
+        <p>Home of Free Applications! Discover and download the top 50 most popular free Android apps of 2025-2026.</p>
+    </div>
+    
+    <div class="search-bar">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for apps...">
+    </div>
+    
+    <div class="container">
+        <div class="row" id="appList">
+            <!-- App Cards will be here -->
+        </div>
+    </div>
+    
+    <!-- Modal Template -->
+    <div class="modal fade" id="appModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="description"></p>
+                    <a class="download btn btn-primary" href="#">Download APK</a>
+                    <img class="img-fluid my-3 hd-photo" src="" alt="HD Photo">
+                    <iframe class="youtube" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="donation">
+        <h3>Support Takumana APK Street</h3>
+        <p>This is a free service! Donate via mobile money to help maintain it.</p>
+        <p>Phone Number for Donations: +265-994-768-244 (Malawi - Replace with your actual number)</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const apps = [
+            { name: "WhatsApp", desc: "Secure messaging app for texts, calls, and media sharing.", apk: "https://www.apkmirror.com/apk/whatsapp-inc/whatsapp/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/whatsapp-icon.png" },
+            { name: "TikTok", desc: "Short-form video creation and sharing platform.", apk: "https://www.apkmirror.com/apk/tiktok-pte-ltd/tiktok/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/tiktok-icon.png" },
+            { name: "Facebook", desc: "Social network for connecting with friends and family.", apk: "https://www.apkmirror.com/apk/facebook-2/facebook/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/facebook-icon.png" },
+            { name: "Instagram", desc: "Photo and video sharing with stories and reels.", apk: "https://www.apkmirror.com/apk/instagram/instagram-instagram/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/instagram-icon.png" },
+            { name: "Messenger", desc: "Chat app integrated with Facebook.", apk: "https://www.apkmirror.com/apk/facebook-2/messenger/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/messenger-icon.png" },
+            { name: "Snapchat", desc: "Ephemeral messaging with filters and stories.", apk: "https://www.apkmirror.com/apk/snap-inc/snapchat/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/snapchat-icon.png" },
+            { name: "Spotify", desc: "Music and podcast streaming service.", apk: "https://www.apkmirror.com/apk/spotify-ltd/spotify/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/spotify-icon.png" },
+            { name: "Netflix", desc: "On-demand video streaming (free trial available).", apk: "https://www.apkmirror.com/apk/netflix-inc/netflix/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/netflix-icon.png" },
+            { name: "YouTube", desc: "Video watching and uploading platform.", apk: "https://www.apkmirror.com/apk/google-inc/youtube/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/youtube-icon.png" },
+            { name: "Gmail", desc: "Email management from Google.", apk: "https://www.apkmirror.com/apk/google-inc/gmail/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/gmail-icon.png" },
+            { name: "Google Maps", desc: "Navigation and location services.", apk: "https://www.apkmirror.com/apk/google-inc/maps/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/maps-icon.png" },
+            { name: "X (Twitter)", desc: "Real-time news and social updates.", apk: "https://www.apkmirror.com/apk/twitter-inc/twitter/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/x-icon.png" },
+            { name: "Pinterest", desc: "Visual discovery and bookmarking.", apk: "https://www.apkmirror.com/apk/pinterest/pinterest/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/pinterest-icon.png" },
+            { name: "Reddit", desc: "Community-driven discussions.", apk: "https://www.apkmirror.com/apk/redditinc/reddit/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/reddit-icon.png" },
+            { name: "Amazon Shopping", desc: "Online shopping and deals.", apk: "https://www.apkmirror.com/apk/amazon-mobile-llc/amazon-shopping/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/amazon-icon.png" },
+            { name: "Shazam", desc: "Music recognition tool.", apk: "https://www.apkmirror.com/apk/apple/shazam/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/shazam-icon.png" },
+            { name: "Zoom", desc: "Video meetings and webinars.", apk: "https://www.apkmirror.com/apk/zoom-video-communications-inc/zoom-cloud/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/zoom-icon.png" },
+            { name: "Telegram", desc: "Fast and secure messaging.", apk: "https://www.apkmirror.com/apk/telegram-fz-llc/telegram/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/telegram-icon.png" },
+            { name: "LinkedIn", desc: "Professional networking.", apk: "https://www.apkmirror.com/apk/linkedin/linkedin/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/linkedin-icon.png" },
+            { name: "Discord", desc: "Community chat for gamers.", apk: "https://www.apkmirror.com/apk/discord-inc/discord-chat-for-gamers/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/discord-icon.png" },
+            { name: "CapCut", desc: "Video editing app.", apk: "https://www.apkmirror.com/apk/bytedance-pte-ltd/capcut/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/capcut-icon.png" },
+            { name: "Google Photos", desc: "Photo backup and editing.", apk: "https://www.apkmirror.com/apk/google-inc/photos/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/photos-icon.png" },
+            { name: "Chrome", desc: "Web browser from Google.", apk: "https://www.apkmirror.com/apk/google-inc/chrome/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/chrome-icon.png" },
+            { name: "Google Drive", desc: "Cloud file storage.", apk: "https://www.apkmirror.com/apk/google-inc/drive/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/drive-icon.png" },
+            { name: "Google Calendar", desc: "Event planning and reminders.", apk: "https://www.apkmirror.com/apk/google-inc/calendar/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/calendar-icon.png" },
+            { name: "Google Translate", desc: "Real-time translation.", apk: "https://www.apkmirror.com/apk/google-inc/translate/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/translate-icon.png" },
+            { name: "Google Play Games", desc: "Gaming achievements hub.", apk: "https://www.apkmirror.com/apk/google-inc/google-play-games/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/playgames-icon.png" },
+            { name: "Facebook Lite", desc: "Light version for low-data use.", apk: "https://www.apkmirror.com/apk/facebook-2/facebook-lite/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/fblite-icon.png" },
+            { name: "Microsoft Teams", desc: "Work collaboration.", apk: "https://www.apkmirror.com/apk/microsoft-corporation/microsoft-teams/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/teams-icon.png" },
+            { name: "Duolingo", desc: "Fun language learning.", apk: "https://www.apkmirror.com/apk/duolingo/duolingo-learn-languages-free/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/duolingo-icon.png" },
+            { name: "Candy Crush Saga", desc: "Match-3 puzzle game.", apk: "https://www.apkmirror.com/apk/king/candy-crush-saga/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/candycrush-icon.png" },
+            { name: "Roblox", desc: "User-generated games platform.", apk: "https://www.apkmirror.com/apk/roblox-corporation/roblox/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/roblox-icon.png" },
+            { name: "Among Us", desc: "Social deduction game.", apk: "https://www.apkmirror.com/apk/innersloth-llc/among-us/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/amongus-icon.png" },
+            { name: "PUBG Mobile", desc: "Battle royale shooter.", apk: "https://www.apkmirror.com/apk/tencent-games/pubg-mobile/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/pubg-icon.png" },
+            { name: "Free Fire", desc: "Fast-paced survival game.", apk: "https://www.apkmirror.com/apk/garena-international-i-private-limited/free-fire/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/freefire-icon.png" },
+            { name: "Subway Surfers", desc: "Endless running adventure.", apk: "https://www.apkmirror.com/apk/sybo-games/subway-surfers/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/subway-icon.png" },
+            { name: "Temple Run", desc: "Classic endless runner.", apk: "https://www.apkmirror.com/apk/imangi-studios/temple-run/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/templerun-icon.png" },
+            { name: "Clash of Clans", desc: "Strategy building game.", apk: "https://www.apkmirror.com/apk/supercell/clash-of-clans/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/clash-icon.png" },
+            { name: "Pokémon GO", desc: "AR Pokémon catching.", apk: "https://www.apkmirror.com/apk/niantic-inc/pokemon-go/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/pokemon-icon.png" },
+            { name: "ChatGPT", desc: "AI conversation assistant.", apk: "https://www.apkmirror.com/apk/openai/chatgpt/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/chatgpt-icon.png" },
+            { name: "Temu", desc: "Affordable online shopping.", apk: "https://www.apkmirror.com/apk/temu/temu/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/temu-icon.png" },
+            { name: "Shein", desc: "Trendy fashion shopping.", apk: "https://www.apkmirror.com/apk/shein/shein/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/shein-icon.png" },
+            { name: "AliExpress", desc: "Global marketplace shopping.", apk: "https://www.apkmirror.com/apk/alibaba-mobile/aliexpress-shopping-app/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/aliexpress-icon.png" },
+            { name: "PayPal", desc: "Secure payments and transfers.", apk: "https://www.apkmirror.com/apk/paypal-mobile/paypal/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/paypal-icon.png" },
+            { name: "Uber", desc: "Ride-sharing and delivery.", apk: "https://www.apkmirror.com/apk/uber-technologies-inc/uber/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/uber-icon.png" },
+            { name: "Bolt", desc: "Affordable ride-hailing.", apk: "https://www.apkmirror.com/apk/bolt-technology/bolt-caac/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/bolt-icon.png" },
+            { name: "Plex", desc: "Free movie/TV streaming (like Onstream alternative).", apk: "https://www.apkmirror.com/apk/plex-inc/plex/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/plex-icon.png" },
+            { name: "Tubi TV", desc: "Ad-supported free streaming.", apk: "https://www.apkmirror.com/apk/tubi-tv/tubi-tv/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/tubi-icon.png" },
+            { name: "Pluto TV", desc: "Free live TV and movies.", apk: "https://www.apkmirror.com/apk/pluto-tv/pluto-tv/", yt: "https://www.youtube.com/embed/dQw4w9WgXcQ", photo: "https://www.apkmirror.com/wp-content/uploads/2025/12/pluto-icon.png" }
+        ];
+        
+        const appList = document.getElementById('appList');
+        apps.forEach(app => {
+            const col = document.createElement('div');
+            col.className = 'col-md-4';
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.innerHTML = `<h4>${app.name}</h4>`;
+            card.onclick = () => {
+                document.querySelector('#appModal .modal-title').textContent = app.name;
+                document.querySelector('#appModal .description').textContent = app.desc;
+                document.querySelector('#appModal .download').href = app.apk;
+                document.querySelector('#appModal .hd-photo').src = app.photo;
+                document.querySelector('#appModal .youtube').src = app.yt;
+                new bootstrap.Modal(document.getElementById('appModal')).show();
+            };
+            col.appendChild(card);
+            appList.appendChild(col);
+        });
+        
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', () => {
+            const filter = searchInput.value.toLowerCase();
+            document.querySelectorAll('.app-card').forEach(card => {
+                card.parentElement.style.display = card.textContent.toLowerCase().includes(filter) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
